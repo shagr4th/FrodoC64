@@ -1,0 +1,132 @@
+# Makefile for Frodo (RISC OS with GCC)
+
+## Version information
+VERSION   = 4
+REVISION  = 2
+
+CXX       = gcc
+CFLAGS    = -O2
+CFLAGSO   = -O3
+SCFLAGS   = -O2 -DFRODO_SC
+SCFLAGSO  = -O3 -DFRODO_SC
+
+LIBRARIES = GCC:o.libgcc C:o.stubs
+LINK      = drlink
+ASS       = as
+
+## Files
+OBJS   = o.Prefs o.REU o.IEC o.1541fs o.1541d64 o.1541t64 o.1541job o.SAM o.ROlib
+SLOBJS = $(OBJS) o.C64 o.CPUC64 o.VIC o.CIA o.CPU1541 o.Display o.SID o.main o.AcornGUI
+SCOBJS = $(OBJS) o.C64_SC o.CPUC64_SC o.VIC_SC o.CIA_SC o.CPU1541_SC o.CPU_common o.Display_SC\
+	 o.main_SC o.SID_SC o.AcornGUI_SC
+
+all: Frodo FrodoSC
+
+Frodo: $(SLOBJS)
+	$(LINK) -o Frodo $(LIBRARIES) $(SLOBJS) $(LDFLAGS)
+
+FrodoPC: $(PCOBJS)
+	$(LINK) -o FrodoPC $(LIBRARIES) $(PCOBJS) $(LDFLAGS)
+
+
+# SC objects
+o.C64_SC:	cc.C64_SC h.C64 i.C64_Acorn h.CPUC64 h.CPU1541 h.VIC h.SID h.CIA h.REU \
+		h.IEC h.1541job h.Display h.Prefs h.ROlib h.AcornGUI i.OldSnap
+	$(CXX) $(INCLUDES) $(SCFLAGS) -c C64_SC.cc
+
+o.CPUC64_SC:	cc.CPUC64_SC h.CPUC64 i.CPU_emulcycle h.CPU_common h.C64 h.VIC h.SID h.CIA \
+		h.REU h.IEC h.Display h.Version h.ROlib
+	$(CXX) $(INCLUDES) $(SCFLAGSO) -c CPUC64_SC.cc
+
+o.CPU1541_SC:	cc.CPU1541_SC h.CPU1541 i.CPU_emulcycle h.CPU_common h.1541job h.C64 h.CIA \
+		h.Display h.ROlib
+	$(CXX) $(INCLUDES) $(SCFLAGSO) -c CPU1541_SC.cc
+
+o.VIC_SC:	cc.VIC_SC h.VIC h.C64 h.CPUC64 h.Display h.Prefs h.ROlib
+	$(CXX) $(INCLUDES) $(SCFLAGSO) -c VIC_SC.cc
+
+o.CIA_SC:	cc.CIA_SC h.CIA h.CPUC64 h.CPU1541 h.VIC h.Prefs
+	$(CXX) $(INCLUDES) $(SCFLAGSO) -c CIA_SC.cc
+
+## These were added for RISC OS -- same source code, but different object files needed!
+o.main_SC:	cc.main_SC cc.main h.main i.main_Acorn h.C64 h.Display h.Prefs h.SAM h.ROlib\
+		h.AcornGUI
+	$(CXX) $(INCLUDES) $(SCFLAGS) -c main_SC.cc
+
+o.Display_SC:	cc.Display_SC cc.Display h.Display i.Display_Acorn h.main h.Prefs h.Version\
+		h.ROlib h.C64 h.AcornGUI h.VIC
+	$(CXX) $(INCLUDES) $(SCFLAGS) -c Display_SC.cc
+	
+o.SID_SC:	cc.SID_SC cc.SID h.SID i.SID_Acorn h.Prefs h.ROlib h.C64 i.FixPoint
+	$(CXX) $(INCLUDES) $(SCFLAGSO) -c SID_SC.cc
+
+o.AcornGUI_SC:	cc.AcornGUI_SC cc.AcornGUI h.AcornGUI h.ROlib h.main h.Prefs h.C64 h.VIC\
+		h.Version
+	$(CXX) $(INCLUDES) $(SCFLAGS) -c AcornGUI_SC.cc
+
+## Dependencies
+o.main:		cc.main h.main i.main_Acorn h.C64 h.Display h.Prefs h.SAM h.ROlib h.AcornGUI
+	$(CXX) $(INCLUDES) $(CFLAGS) -c main.cc
+	
+o.C64:		cc.C64 h.C64 i.C64_Acorn h.CPUC64 h.CPU1541 h.VIC h.SID h.CIA \
+		h.REU h.IEC h.1541job h.Display h.Prefs h.ROlib h.AcornGUI i.OldSnap
+	$(CXX) $(INCLUDES) $(CFLAGS) -c C64.cc
+
+o.Display:	cc.Display h.Display i.Display_Acorn h.main h.Prefs h.Version h.ROlib h.C64\
+		h.AcornGUI h.VIC
+	$(CXX) $(INCLUDES) $(CFLAGS) -c Display.cc
+
+o.Prefs:	cc.Prefs h.Prefs h.Display h.main h.ROlib
+	$(CXX) $(INCLUDES) $(CFLAGS) -c Prefs.cc
+
+o.CPUC64:	cc.CPUC64 h.CPUC64 i.CPU_emulline h.C64 h.VIC h.SID h.CIA h.REU h.IEC \
+		h.Display h.Version h.ROlib
+	$(CXX) $(INCLUDES) $(CFLAGSO) -c CPUC64.cc
+
+o.CPU1541:	cc.CPU1541 h.CPU1541 i.CPU_emulline h.1541job h.C64 h.CIA h.Display h.ROlib
+	$(CXX) $(INCLUDES) $(CFLAGSO) -c CPU1541.cc
+
+o.CPU_common:	cc.CPU_common h.CPU_common
+	$(CXX) $(INCLUDES) $(CFLAGS) -c CPU_common.cc
+
+o.VIC:		cc.VIC h.VIC h.C64 h.CPUC64 h.Display h.Prefs h.ROlib i.el_Acorn
+	$(CXX) $(INCLUDES) $(CFLAGSO) -c VIC.cc
+
+o.SID:		cc.SID h.SID i.SID_Acorn h.Prefs h.ROlib h.C64 i.FixPoint
+	$(CXX) $(INCLUDES) $(CFLAGSO) -c SID.cc
+
+o.CIA:		cc.CIA h.CIA h.CPUC64 h.CPU1541 h.VIC h.Prefs
+	$(CXX) $(INCLUDES) $(CFLAGSO) -c CIA.cc
+
+o.IEC:		cc.IEC h.IEC h.1541fs h.1541d64 h.1541t64 h.Prefs h.Display h.ROlib
+	$(CXX) $(INCLUDES) $(CFLAGS) -c IEC.cc
+
+o.1541fs:	cc.1541fs h.1541fs h.IEC h.main h.Prefs h.ROlib
+	$(CXX) $(INCLUDES) $(CFLAGS) -c 1541fs.cc
+
+h.1541fs:	h.IEC
+
+o.1541d64:	cc.1541d64 h.1541d64 h.IEC h.Prefs
+	$(CXX) $(INCLUDES) $(CFLAGS) -c 1541d64.cc
+
+h.1541d64:	h.IEC
+
+o.1541t64:	cc.1541t64 h.1541t64 h.IEC h.Prefs
+	$(CXX) $(INCLUDES) $(CFLAGS) -c 1541t64.cc
+
+h.1541t64:	h.IEC
+
+o.1541job:	cc.1541job h.1541job h.CPU1541 h.Prefs
+	$(CXX) $(INCLUDES) $(CFLAGS) -c 1541job.cc
+
+o.REU:		cc.REU h.REU h.CPUC64 h.Prefs
+	$(CXX) $(INCLUDES) $(CFLAGS) -c REU.cc
+
+o.SAM:		cc.SAM h.SAM h.C64 h.CPUC64 h.CPU1541 h.VIC h.SID h.CIA
+	$(CXX) $(INCLUDES) $(CFLAGS) -c SAM.cc
+
+o.ROlib:	s.ROlib
+	$(ASS) -o o.ROlib s.ROlib
+
+o.AcornGUI:	cc.AcornGUI h.AcornGUI h.ROlib h.main h.Display h.Prefs h.Version h.C64 h.VIC
+	$(CXX) $(INCLUDES) $(CFLAGS) -c AcornGUI.cc

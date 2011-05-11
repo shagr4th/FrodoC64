@@ -1,0 +1,15 @@
+#!/bin/bash
+
+for i in c64 c64/frodo c64/snapshots c64/snapshots/thumbs c64/tmp;
+do
+	if [ ! -e $i ]
+	then
+		mkdir $i
+	fi
+done
+
+./FrodoPC &> ./c64/frodo/frodo_log.txt
+
+cd /usr/gp2x
+./gp2xmenu
+

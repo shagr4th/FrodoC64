@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Frodo C64</string>
+<string name="load_image">Load Disk</string>
+<string name="fast_start">Fast run</string>
+<string name="keyb_mode">Keyboard mode</string>
+<string name="joy_mode">Joystick mode</string>
+<string name="keyb_mode_text">Keyboard mode !\nPush BACK to switch to joystick</string>
+<string name="joy_mode_text">Joystick mode !\nPush BACK to switch to keyboard</string>
+<string name="reset">Reset</string>
+<string name="quit">Quit</string>
+<string name="settings">Settings</string>
+<string name="sound">Sound</string>
+<string name="sound_summary">Let\'s hear some SIDs! (need restart)</string>
+<string name="virtual_keyb">On screen controls / landscape</string>
+<string name="general_settings">General Settings</string>
+<string name="mapping_settings">Mapping settings</string>
+<string name="joystick_mapping">Joystick mapping</string>
+<string name="keyboard_mapping">Keyboard mapping</string>
+<string name="show_borders">Show borders</string>
+<string name="show_borders_summary">Display the C64 borders</string>
+<string name="virtual_keyb_summary">Display virtual controls in landscape mode</string>
+<string name="frame_skip">Frame skip count</string>
+<string name="frame_skip_summary">Performance tweaking (smaller is better, but sound could be choppy)</string>
+<string-array name="fs_entries"><item>1</item><item>2</item><item>3</item><item>4</item><item>5</item></string-array>
+<string name="change_joy_port">Change joystick port</string>
+<string name="ok">Ok</string>
+<string name="help">Help</string>
+<string name="help_msg"><u><b>Frodo Help</b></u>\n\n\n<u><b>1. Useful shortcuts</b></u>\n\n- Back key = switch between joystick and keyboard mode (same as the menu item)\n\n<u><b>2. Physical Controls</b></u>\n\nD-Pad fire and moves are already supported. You can check the defaults value for physical keyb/joystick controls in the Settings menu, you can also change them.\n\n\n<u><b>3. Disk loading</b></u>\n\nD64 and PRG files are supported. PRG files are directly loaded and launched, while you can choose a specific program of the\nD64 disk image (or load the disk \'as is\', i.e. launching the first entry found), or choose a snapshot if you previously saved one.\nYou will then see a LOAD"*",8,1, followed by a RUN. If you got a "File Not Found" error, it\'s likely you selected the wrong program in the D64 browser view.\nTry the entry #2, #3, etc.\n\n\n<u><b>4. Program launch</b></u>\n\nWhen loaded, and program intro is running, C64 programs can be tricky to start. Sometimes it\'s the space bar, sometimes it\'s the "Run/Stop" button, \nsometimes it\'s the joystick fire (port 1 or port 2, be aware that a few programs does not support both ports).\n\n\n<u><b>5. Compatibility</b></u>\n\nThis build of Frodo have a good compatibility but some programs can be troublesome to run. Here\'s some hints:\n- If the program seems stuck during the loading step, it could be a basic emulation issue. Try to enable "1541 emulation" option. it\'s much slower\nto load, but you could have some good results.\n- If you have some sort of graphical corruption at start or during the play, it\'s likely a cycle emulation issue. You can change the precise cycles option (restart), but no guarantee here.\n\n\n<u><b>6. Performance</b></u>\n\nWith sound enabled, on a standard Android device, a frame skip value of 3, maybe 2 is ok to have a good C64 experience.\nWithout the sound, you can set this to 1 to achieve more than 40 fps without much hiccups !\n\n\n\nEnjoy !</string>
+<string name="enable_1541">1541 Emulation</string>
+<string name="enable_1541_summary">Required for a few programs (especially if bad things happens during the loading time)</string>
+<string name="load_snap">Load state</string>
+<string name="save_snap">Save state</string>
+<string name="snapshot_found">Found state file!</string>
+<string name="found_snapshot_summary">A state file of this disk image exists. Do you want to run it or have a fresh start?</string>
+<string name="start_load_snap">Start state file</string>
+<string name="start_fresh">Start over</string>
+<string name="no_image_loaded">No image loaded!</string>
+<string name="no_snap_found">No state file found!</string>
+<string name="load_first_disk_entry">Start the disk (first entry found)</string>
+<string name="load_snapshot_found">Load previously saved state file</string>
+<string name="load_specific_program">Load disk program</string>
+<string name="custom_mappings">Customize physical mapping</string>
+<string name="custom_mappings_summary">Change default mapping for important controls</string>
+<string name="frodopc">&quot;Precise Cycles&quot; mode</string>
+<string name="frodopc_summary">A little slower but better compatibility (need restart)</string>
+<string name="enable_fsjoystick">Full screen joystick layout</string>
+<string name="enable_fsjoystick_summary">Alternative layout, much playable, but where you can hide parts of the screen with your fingers</string>
+<string-array name="load_rom_choice"><item>Load custom disk image</item><item>Choose a free embedded game</item>
+
+</string-array>
+<string-array name="joystick_layout"><item>bottom_bottom</item><item>top_bottom</item><item>bottom_top</item><item>top_top</item></string-array>
+<string-array name="joystick_layout_test"><item>Bottom + Bottom</item><item>Top + Bottom</item><item>Bottom + Top</item><item>Top + Top</item></string-array>
+<string-array name="joystick_size"><item>small</item><item>medium</item><item>large</item></string-array>
+<string-array name="screen_size"><item>stretched</item><item>scaled</item><item>2x</item><item>1x</item></string-array>
+<string name="choose_rom_choice">Select an option</string>
+<string name="cancel">Cancel</string>
+<string name="screen_size_text">Screen Size</string>
+<string name="showhidetouchcontrols">Show/Hide touch controls</string>
+<string name="joystick_layout_test">Virtual joystick Layout</string>
+<string name="joystick_layout_size">Virtual joystick Size</string>
+<string name="old_joystick">Old joystick (v0.93.x)</string>
+<string name="old_joystick_summay">Enable old touch joystick (new one may cause perf issues on old devices ?)</string>
+</resources>

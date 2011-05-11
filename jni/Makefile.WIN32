@@ -1,0 +1,111 @@
+# Makefile for Frodo (WIN32 DirectX with MSVC++)
+
+## Version information
+VERSION   = 4
+REVISION  = 2
+
+# Choose static (L) or dynamic (D) version of C library
+LIBC      = L
+#LIBC      = D
+
+# Choose debug or optimized build
+#CFLAGS   = -W2 -Zi -DDEBUG -D_DEBUG -M$(LIBC)d
+CFLAGS    = -Ox2 -G5 -Gi- -FAsc -M$(LIBC)
+
+CXX       = cl
+RC        = rc
+ALLCFLAGS = -I. -DWIN32 -DSTRICT -D__i386 $(CFLAGS)
+ALLSCCFLAGS = -DFRODO_SC -DBATCH_CIA_CYCLES $(ALLCFLAGS)
+#ALLSCCFLAGS = -DFRODO_SC $(ALLCFLAGS)
+ALLPCCFLAGS = -DPRECISE_CPU_CYCLES=1 -DPRECISE_CIA_CYCLES=1 -DPC_IS_POINTER=0 $(ALLCFLAGS)
+LDFLAGS   = $(ALLCFLAGS)
+LIBRARIES = user32.lib kernel32.lib gdi32.lib ddraw.lib dsound.lib winmm.lib comctl32.lib comdlg32.lib shell32.lib
+#PROFILE  = /link /profile
+
+## Files
+OBJS   = main.obj Display.obj Prefs.obj SID.obj REU.obj IEC.obj 1541fs.obj \
+         1541d64.obj 1541t64.obj 1541job.obj SAM.obj ndir.obj Frodo.res
+SLOBJS = $(OBJS) C64.obj CPUC64.obj VIC.obj CIA.obj CPU1541.obj
+SCOBJS = $(OBJS) C64_SC.obj CPUC64_SC.obj VIC_SC.obj CIA_SC.obj CPU1541_SC.obj CPU_common.obj
+PCOBJS = $(OBJS) C64_PC.obj CPUC64_PC.obj VIC.obj CIA.obj CPU1541_PC.obj
+
+Frodo: Frodo.exe
+
+Frodo.exe: $(SLOBJS)
+	$(CXX) -FeFrodo.exe $(SLOBJS) $(LDFLAGS) $(LIBRARIES)
+	copy Frodo.exe ..
+
+FrodoSC: FrodoSC.exe
+
+FrodoSC.exe: $(SCOBJS)
+	$(CXX) -FeFrodoSC.exe $(SCOBJS) $(LDFLAGS) $(LIBRARIES) $(PROFILE)
+	copy FrodoSC.exe ..
+
+FrodoPC: FrodoPC.exe
+
+FrodoPC.exe: $(PCOBJS)
+	$(CXX) -FeFrodoPC.exe $(PCOBJS) $(LDFLAGS) $(LIBRARIES)
+	copy FrodoPC.exe ..
+
+Frodo.res: Frodo.rc Frodo.ico
+	$(RC) Frodo.rc
+
+all: Frodo FrodoSC FrodoPC
+
+clean:
+	rm -f $(SLOBJS) $(SCOBJS) $(PCOBJS)
+	rm -f Frodo.exe FrodoSC.exe FrodoPC.exe
+	rm -f *.ilk *.pdb *.cod *.nms *.res *.aps
+
+.cpp.obj:
+	$(CXX) $(ALLCFLAGS) -o $@ -c $*.cpp
+
+.c.obj:
+	$(CXX) $(ALLCFLAGS) -o $@ -c $*.c
+       
+C64_SC.obj: C64.cpp C64.h C64_WIN32.h CmdPipe.h CPUC64.h CPU1541.h VIC.h SID.h CIA.h REU.h IEC.h 1541job.h Display.h Prefs.h
+	$(CXX) $(ALLSCCFLAGS) -Fo$@ -c $*.cpp
+
+CPUC64_SC.obj: CPUC64_SC.cpp CPUC64.h CPU_emulcycle.h CPU_common.h C64.h VIC.h SID.h CIA.h REU.h IEC.h Display.h Version.h
+	$(CXX) $(ALLSCCFLAGS) -Fo$@ -c $*.cpp
+
+CPU1541_SC.obj: CPU1541_SC.cpp CPU1541.h CPU_emulcycle.h CPU_common.h 1541job.h C64.h CIA.h Display.h
+	$(CXX) $(ALLSCCFLAGS) -Fo$@ -c $*.cpp
+
+VIC_SC.obj: VIC_SC.cpp VIC.h C64.h CPUC64.h Display.h Prefs.h
+	$(CXX) $(ALLSCCFLAGS) -Fo$@ -c $*.cpp
+
+CIA_SC.obj: CIA_SC.cpp CIA.h CPUC64.h CPU1541.h VIC.h Prefs.h
+	$(CXX) $(ALLSCCFLAGS) -Fo$@ -c $*.cpp
+
+C64_PC.obj: C64.cpp C64.h C64_WIN32.h CmdPipe.h CPUC64.h CPU1541.h VIC.h SID.h CIA.h REU.h IEC.h 1541job.h Display.h Prefs.h
+	$(CXX) $(ALLPCCFLAGS) -Fo$@ -c $*.cpp
+
+CPUC64_PC.obj: CPUC64.cpp CPUC64.h CPU_emulline.h CPU_common.h C64.h VIC.h SID.h CIA.h REU.h IEC.h Display.h Version.h
+	$(CXX) $(ALLPCCFLAGS) -DPC_IS_POINTER=0 -Fo$@ -c $*.cpp
+
+CPU1541_PC.obj: CPU1541_PC.cpp CPU1541.h CPU_emulline.h CPU_common.h 1541job.h C64.h CIA.h Display.h
+	$(CXX) $(ALLPCCFLAGS) -Fo$@ -c $*.cpp
+
+## Dependencies
+main.obj: main.cpp main.h main_WIN32.h C64.h Display.h Prefs.h SAM.h
+C64.obj: C64.cpp C64.h C64_WIN32.h CmdPipe.h CPUC64.h CPU1541.h VIC.h SID.h CIA.h REU.h IEC.h 1541job.h Display.h Prefs.h
+CmdPipe.obj: CmdPipe.h
+Display.obj: Display.cpp Display.h Display_WIN32.h main.h Prefs.h Version.h resource.h
+Prefs.obj: Prefs.cpp Prefs.h Prefs_WIN32.h Display.h main.h resource.h
+CPUC64.obj: CPUC64.cpp CPUC64.h CPU_emulline.h C64.h VIC.h SID.h CIA.h REU.h IEC.h Display.h Version.h
+CPU1541.obj: CPU1541.cpp CPU1541.h CPU_emulline.h 1541job.h C64.h CIA.h Display.h
+CPU_common.obj: CPU_common.cpp CPU_common.h
+VIC.obj: VIC.cpp VIC.h C64.h CPUC64.h Display.h Prefs.h
+SID.obj: SID.cpp SID.h SID_WIN32.h Prefs.h main.h
+CIA.obj: CIA.cpp CIA.h CPUC64.h CPU1541.h VIC.h Prefs.h
+IEC.obj: IEC.cpp IEC.h 1541fs.h 1541d64.h 1541t64.h Prefs.h Display.h
+1541fs.obj: 1541fs.cpp 1541fs.h IEC.h main.h Prefs.h
+1541fs.h: IEC.h
+1541d64.obj: 1541d64.cpp 1541d64.h IEC.h Prefs.h
+1541d64.h: IEC.h
+1541t64.obj: 1541t64.cpp 1541t64.h IEC.h Prefs.h
+1541t64.h: IEC.h
+1541job.obj: 1541job.cpp 1541job.h CPU1541.h Prefs.h
+REU.obj: REU.cpp REU.h CPUC64.h Prefs.h
+SAM.obj: SAM.cpp SAM.h C64.h CPUC64.h CPU1541.h VIC.h SID.h CIA.h

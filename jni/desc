@@ -1,0 +1,5 @@
+Famous C64 emulator, ported to Android. More infos in the help menu !
+
+v0.92: Speed optimizations/better scaling (OpenGL rendering), touchscreen controls, D64 browser/launcher (no more "File Not Found")
+
+As Frodo's "best emulation mode" is too heavy for mobile devices, a few programs may not work here

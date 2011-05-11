@@ -1,0 +1,291 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <windows.h>
+#include <commctrl.h>
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+FRODO_ICON              ICON    DISCARDABLE     "Frodo.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAIN_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New",                        ID_FILE_NEW
+        MENUITEM "&Open...",                    ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "&Save",                       ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVEAS
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\tF10",                  ID_FILE_EX
+    END
+    POPUP "&Tools"
+    BEGIN
+        MENUITEM "&Preferences...",             ID_TOOLS_PREFERENCES
+        MENUITEM SEPARATOR
+        MENUITEM "P&ause\tPause",               ID_TOOLS_PAUSE
+        MENUITEM "&Fullscreen\tAlt-Enter",      ID_TOOLS_FULLSCREEN
+        MENUITEM "Reset &DirectDraw\tCtrl-Enter", ID_TOOLS_RESETDIRECTDRAW
+        MENUITEM SEPARATOR
+        MENUITEM "Reset &C64\tF12",             ID_TOOLS_RESETC64
+        MENUITEM "&Insert Next Disk",           ID_TOOLS_INSERTNEXTDISK
+        MENUITEM SEPARATOR
+        MENUITEM "&SAM...",                     ID_TOOLS_SAM, GRAYED
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Contents...",                ID_HELP_CONTENTS
+        MENUITEM "&Keyboard...",                ID_HELP_KEYBOARD
+        MENUITEM "&Settings...",                ID_HELP_SETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "&About...",                   ID_HELP_ABOUT
+    END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include <windows.h>\r\n"
+    "#include <commctrl.h>\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PREFERENCES_STANDARD DIALOG DISCARDABLE  0, 0, 272, 221
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Standard"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "&Devices",IDC_STATIC,5,0,260,90
+    RTEXT           "8",IDC_STATIC,10,10,15,10
+    EDITTEXT        IDC_DEVICE8,35,10,160,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse...",IDC_BROWSE8,205,10,50,14
+    RTEXT           "9",IDC_STATIC,10,30,15,10
+    EDITTEXT        IDC_DEVICE9,35,30,160,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse...",IDC_BROWSE9,205,30,50,14
+    RTEXT           "10",IDC_STATIC,10,50,15,10
+    EDITTEXT        IDC_DEVICE10,35,50,160,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse...",IDC_BROWSE10,205,50,50,14
+    RTEXT           "11",IDC_STATIC,10,70,15,10
+    EDITTEXT        IDC_DEVICE11,35,70,160,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse...",IDC_BROWSE11,205,70,50,14
+    GROUPBOX        "&Parameters",IDC_STATIC,5,95,260,45
+    LTEXT           "Normal",IDC_STATIC,15,105,40,8
+    EDITTEXT        IDC_NORMAL,15,120,35,14,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_NORMAL_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,40,120,11,14
+    LTEXT           "Bad Lines",IDC_STATIC,55,105,40,8
+    EDITTEXT        IDC_BADLINES,55,120,35,14,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_BADLINES_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,80,120,11,14
+    LTEXT           "CIA",IDC_STATIC,95,105,35,8
+    EDITTEXT        IDC_CIA,95,120,35,14,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_CIA_SPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,120,120,
+                    11,14
+    LTEXT           "Floppy",IDC_STATIC,135,105,40,8
+    EDITTEXT        IDC_FLOPPY,135,120,35,14,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_FLOPPY_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,161,120,11,14
+    LTEXT           "Draw Every",IDC_STATIC,175,105,45,8
+    EDITTEXT        IDC_DRAWEVERY,175,120,35,14,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_DRAWEVERY_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,201,120,11,14
+    LTEXT           "REU Size",IDC_STATIC,220,105,40,8
+    COMBOBOX        IDC_REUSIZE,220,120,35,95,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "&Options",IDC_STATIC,5,145,260,70
+    CONTROL         "Limit Speed",IDC_LIMITSPEED,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,155,80,10
+    CONTROL         "Sprites",IDC_SPRITES,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,101,155,80,10
+    CONTROL         "Sprite Collisions",IDC_SPRITECOLLISIONS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,185,155,75,10
+    CONTROL         "Joystick 1",IDC_JOYSTICK1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,170,80,10
+    CONTROL         "Joystick 2",IDC_JOYSTICK2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,101,170,80,10
+    CONTROL         "Swap Joysticks",IDC_SWAPJOYSTICKS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,185,170,75,10
+    CONTROL         "Fast Reset",IDC_FASTRESET,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,185,80,10
+    CONTROL         "CIA IRQ Hack",IDC_CIAIRQHACK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,101,185,80,10
+    CONTROL         "Map /",IDC_MAPSLASH,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,185,185,75,10
+    CONTROL         "SID Emulation",IDC_SIDEMULATION,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,200,80,10
+    CONTROL         "SID Filters",IDC_SIDFILTERS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,100,200,80,10
+    CONTROL         "1541 Emulation",IDC_1541EMULATION,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,185,200,75,10
+END
+
+IDD_PREFERENCES_WIN32 DIALOG DISCARDABLE  0, 0, 272, 221
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "WIN32"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "&Video",IDC_STATIC,5,0,260,60
+    CONTROL         "Fullscreen at startup",IDC_FULLSCREEN,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,15,85,10
+    CONTROL         "System Memory",IDC_SYSTEMMEMORY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,30,85,10
+    CONTROL         "Always Copy",IDC_ALWAYSCOPY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,45,85,10
+    LTEXT           "View&port",IDC_STATIC,110,20,70,8
+    COMBOBOX        IDC_VIEWPORT,110,31,70,184,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Display &Mode",IDC_STATIC,185,20,70,8
+    COMBOBOX        IDC_DISPLAYMODE,185,31,70,184,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "&Window",IDC_STATIC,5,65,260,50
+    CONTROL         "Hide Cursor",IDC_HIDECURSOR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,80,85,10
+    CONTROL         "System Keys",IDC_SYSTEMKEYS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,95,85,10
+    RTEXT           "Scaling &Numerator",IDC_STATIC,110,75,95,10
+    EDITTEXT        IDC_SCALINGNUMERATOR,215,75,40,14,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_SCALINGNUMERATOR_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,245,75,11,14
+    RTEXT           "Scaling &Denominator",IDC_STATIC,110,95,95,10
+    EDITTEXT        IDC_SCALINGDENOMINATOR,215,95,40,14,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_SCALINGDENOMINATOR_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,245,95,11,14
+    GROUPBOX        "&Sound",IDC_STATIC,5,120,260,45
+    CONTROL         "DirectSound",IDC_DIRECTSOUND,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,135,85,10
+    CONTROL         "Exclusive",IDC_EXCLUSIVESOUND,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,150,85,10
+    LTEXT           "Latency Min",IDC_STATIC,105,130,50,8
+    EDITTEXT        IDC_LATENCYMIN,105,140,40,14,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_LATENCYMIN_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,135,140,11,14
+    LTEXT           "Latency Max",IDC_STATIC,160,130,50,8
+    EDITTEXT        IDC_LATENCYMAX,160,140,40,14,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_LATENCYMAX_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,190,140,11,14
+    LTEXT           "Latency Avg",IDC_STATIC,215,130,45,8
+    EDITTEXT        IDC_LATENCYAVG,215,140,40,14,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_LATENCYAVG_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,245,140,11,14
+    GROUPBOX        "&General",IDC_STATIC,5,170,260,45
+    CONTROL         "Auto Pause",IDC_AUTOPAUSE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,185,85,10
+    CONTROL         "Show LEDs",IDC_SHOWLEDS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,105,185,85,10
+    CONTROL         "Preferences at startup",IDC_PREFSATSTARTUP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,200,85,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_PREFERENCES_STANDARD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 265
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 214
+    END
+
+    IDD_PREFERENCES_WIN32, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 265
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 214
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_INVISIBLE           CURSOR  DISCARDABLE     "Invisible.cur"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

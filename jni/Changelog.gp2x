@@ -1,0 +1,41 @@
+
+0.9.9
+customisable keymaps by Atle Slagsvold
+
+0.9.8
+tv out fix
+
+0.9.6
+cleared out lots of unused code
+added scaled mode
+added non-working brightness/contrast control
+fixed crash when zip archive member can't be opened
+fixed volume control
+synced prefs background
+added faster file browsing with left/right
+
+0.9.5
+added control reversal option
+gp2x in 8 bit mode, with double buffering
+
+0.9.4
+switched the rest of the input from sdl to rlyeh's
+excised sdl libs
+tidied startup script
+snapshot thumbs
+sequentially numbered snapshot names
+fixed crash opening paths that are too long
+
+0.9.3
+made joypad less sensitive to diagonals
+now including Frodo and FrodoPC
+added some (poor) volume control
+switched some input from sdl to rlyeh's memdev reads
+
+0.9.2
+switched graphics from sdl to framebuffer
+fixed zipfile support
+
+0.9
+initial release
+

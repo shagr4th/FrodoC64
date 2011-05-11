@@ -1,0 +1,86 @@
+# Makefile for Frodo (AmigaOS with GCC)
+
+## Version information
+VERSION   = 4
+REVISION  = 2
+
+CXX       = gcc
+CFLAGS    = -O2 -I./ -fomit-frame-pointer -m68040 -m68881
+LIBRARIES =
+
+.SUFFIXES: .o .cpp .c .h
+
+## Files
+OBJS    = main.o Display.o Prefs.o AmigaGUI.o SID.o REU.o IEC.o 1541fs.o \
+          1541d64.o 1541t64.o 1541job.o SAM.o
+SLOBJS  = $(OBJS) C64.o CPUC64.o VIC.o CIA.o CPU1541.o
+SLFLAGS = -DPRECISE_CPU_CYCLES=1 -DPRECISE_CIA_CYCLES=1 -DPC_IS_POINTER=0
+SCOBJS  = $(OBJS) C64_SC.o CPUC64_SC.o VIC_SC.o CIA_SC.o CPU1541_SC.o CPU_common.o
+SCFLAGS = -DFRODO_SC
+
+Frodo: $(SLOBJS)
+	$(CXX) -o Frodo $(SLOBJS) $(LDFLAGS) $(LIBRARIES)
+	copy Frodo /
+
+FrodoSC: $(SCOBJS)
+	$(CXX) -o FrodoSC $(SCOBJS) $(LDFLAGS) $(LIBRARIES)
+	copy FrodoSC /
+
+all: Frodo FrodoSC
+
+clean:
+	@-delete $(SLOBJS) $(SCOBJS)
+	@-delete -f Frodo FrodoSC
+
+.cpp.o:
+	$(CXX) $(INCLUDES) $(CFLAGS) -o $@ -c $*.cpp
+
+.c.o:
+	$(CXX) $(INCLUDES) $(CFLAGS) -o $@ -c $*.c
+
+C64.o: C64.cpp
+	$(CXX) $(INCLUDES) $(CFLAGS) $(SLFLAGS) -o $@ -c $*.cpp
+
+C64_SC.o: C64.cpp
+	$(CXX) $(INCLUDES) $(CFLAGS) $(SCFLAGS) -o $@ -c $*.cpp
+
+CPUC64.o: CPUC64.cpp
+	$(CXX) $(INCLUDES) $(CFLAGS) $(SLFLAGS) -o $@ -c $*.cpp
+
+CPUC64_SC.o: CPUC64_SC.cpp
+	$(CXX) $(INCLUDES) $(CFLAGS) $(SCFLAGS) -o $@ -c $*.cpp
+
+CPU1541.o: CPU1541.cpp
+	$(CXX) $(INCLUDES) $(CFLAGS) $(SLFLAGS) -o $@ -c $*.cpp
+
+CPU1541_SC.o: CPU1541_SC.cpp
+	$(CXX) $(INCLUDES) $(CFLAGS) $(SCFLAGS) -o $@ -c $*.cpp
+
+VIC_SC.o: VIC_SC.cpp
+	$(CXX) $(INCLUDES) $(CFLAGS) $(SCFLAGS) -o $@ -c $*.cpp
+
+CIA_SC.o: CIA_SC.cpp
+	$(CXX) $(INCLUDES) $(CFLAGS) $(SCFLAGS) -o $@ -c $*.cpp
+
+## Dependencies
+main.o: main.cpp main.h main_Amiga.h C64.h Display.h Prefs.h SAM.h
+C64.o: C64.cpp C64.h C64_Amiga.h CmdPipe.h CPUC64.h CPU1541.h VIC.h SID.h CIA.h REU.h IEC.h 1541job.h Display.h Prefs.h
+CmdPipe.o: CmdPipe.h
+Display.o: Display.cpp Display.h Display_Amiga.h main.h Prefs.h Version.h
+Prefs.o: Prefs.cpp Prefs.h Prefs_Amiga.h Display.h main.h
+CPUC64.o: CPUC64.cpp CPUC64.h CPU_emulline.h C64.h VIC.h SID.h CIA.h REU.h IEC.h Display.h Version.h
+CPU1541.o: CPU1541.cpp CPU1541.h CPU_emulline.h 1541job.h C64.h CIA.h Display.h
+CPU_common.o: CPU_common.cpp CPU_common.h
+VIC.o: VIC.cpp VIC.h C64.h CPUC64.h Display.h Prefs.h
+SID.o: SID.cpp SID.h SID_Amiga.h Prefs.h
+CIA.o: CIA.cpp CIA.h CPUC64.h CPU1541.h VIC.h Prefs.h
+IEC.o: IEC.cpp IEC.h 1541fs.h 1541d64.h 1541t64.h Prefs.h Display.h
+1541fs.o: 1541fs.cpp 1541fs.h IEC.h main.h Prefs.h
+1541fs.h: IEC.h
+1541d64.o: 1541d64.cpp 1541d64.h IEC.h Prefs.h
+1541d64.h: IEC.h
+1541t64.o: 1541t64.cpp 1541t64.h IEC.h Prefs.h
+1541t64.h: IEC.h
+1541job.o: 1541job.cpp 1541job.h CPU1541.h Prefs.h
+REU.o: REU.cpp REU.h CPUC64.h Prefs.h
+SAM.o: SAM.cpp SAM.h C64.h CPUC64.h CPU1541.h VIC.h SID.h CIA.h
