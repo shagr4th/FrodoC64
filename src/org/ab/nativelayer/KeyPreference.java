@@ -1,15 +1,18 @@
 package org.ab.nativelayer;
 
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.DialogInterface.OnKeyListener;
 import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -52,7 +55,7 @@ public class KeyPreference extends DialogPreference implements OnKeyListener {
 	}
 
 	public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-		if (event.getAction() == KeyEvent.ACTION_DOWN) {
+		if (event.getAction() == KeyEvent.ACTION_UP) {
 			for(int d=0;d<deniedKeyCode.length;d++) {
 				if (keyCode == deniedKeyCode[d])
 					return false;
@@ -136,6 +139,17 @@ public class KeyPreference extends DialogPreference implements OnKeyListener {
 			case KeyEvent.KEYCODE_TAB: return "TAB";
 		}
 		return "Code: " + keycode;
+	}
+	
+	@Override
+	protected void showDialog(Bundle state) {
+		super.showDialog(state);
+
+		final Dialog dialog = getDialog();
+		if (dialog != null) {
+			dialog.getWindow().clearFlags(
+					WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+		}
 	}
 
 }

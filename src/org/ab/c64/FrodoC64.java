@@ -28,6 +28,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 
@@ -311,15 +312,12 @@ public class FrodoC64 extends MainActivity implements GameKeyListener
  	   				if (filename != null) {
  	   					File f = new File(filename);
 	   					if (f.exists()) {
-	   						pauseVideo();
-	   						blockResume = true;
 	   						currentFile = f;
 	   						/*File snap = new File(currentFile + ".sav");
 	   						if (snap.exists()) {
 	   	        				showDialog(DIALOG_SNAP);
 	   	        			} else {
 	   	        				loadC64Image(filename);
-	   	        				blockResume = false;
 	   	        				onResume();
 	   	        			}*/
 	   						String extra1 = extras.getStringExtra("extra1");
@@ -337,7 +335,6 @@ public class FrodoC64 extends MainActivity implements GameKeyListener
 	   							// disk browser
 	   							loadC64Image(extra1, false, filename);
 	   						}
-	   						blockResume = false;
    	        				onResume();
 	   					}
  	   				}
@@ -371,6 +368,13 @@ public class FrodoC64 extends MainActivity implements GameKeyListener
     	KeyEvent.KEYCODE_U, KeyEvent.KEYCODE_N, KeyEvent.KEYCODE_H, KeyEvent.KEYCODE_J};
     public static String default_keycodes_string [] = { "Fire", "Alt.Fire" , "Up", "Down", "Left", "Right", "UpLeft", "UpRight", "DownLeft", "DownRight", "Run/Stop", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "CTRL", "Restore", "C=", "ESC", "Cursor UP", "Cursor DOWN", "Cursor LEFT", "Cursor RIGHT"};
     public static int current_keycodes [];
+    
+    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+    	if ("useInputMethod".equals(key))
+    	getWindow().setFlags(prefs.getBoolean(key, false) ?
+				0 : WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
+				WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+    }
 	
     public void majSettings(SharedPreferences sp) {
     	border = sp.getBoolean("border", false);
@@ -387,6 +391,7 @@ public class FrodoC64 extends MainActivity implements GameKeyListener
         	for(int i=0;i<default_keycodes.length;i++)
         		current_keycodes[i] = sp.getInt("key." + default_keycodes_string[i], default_keycodes[i]);
         }
+        onSharedPreferenceChanged(sp, "useInputMethod");
     }
     
     
@@ -396,28 +401,18 @@ public class FrodoC64 extends MainActivity implements GameKeyListener
 		super.onPause();
 		pause();
 		pauseAudio();
-		pauseVideo();
 	}
-	
-	protected void pauseVideo() {
-		
-	}
-	
+
 	public void emulatorReady() {
 		Log.i(getID(), "emulatorReady");
 		if (mainView  != null)
 			mainView.emulatorReady();
     }
-	
-	private boolean blockResume;
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		resume();
-		if (!blockResume) {
-			
-		}
 		playAudio();
 	}
 
@@ -433,8 +428,7 @@ public class FrodoC64 extends MainActivity implements GameKeyListener
 	
 	@Override
 	protected Dialog onCreateDialog(int id) {
-		pauseVideo();
-			switch (id) {
+		switch (id) {
 		   case DIALOG_HELP: return new AlertDialog.Builder(FrodoC64.this)
 	       .setIcon(R.drawable.alert_dialog_icon)
 	       .setTitle(R.string.help)
@@ -458,7 +452,6 @@ public class FrodoC64 extends MainActivity implements GameKeyListener
 	        			   loadC64Snap(snap);
 	        		   }
 	        	   }
-	        	   blockResume = false;
 	        	   onResume();
 	           }
 	       })
@@ -466,7 +459,6 @@ public class FrodoC64 extends MainActivity implements GameKeyListener
 	           public void onClick(DialogInterface dialog, int whichButton) {
 	        	   if (currentFile != null)
 	        		   loadC64Image(currentFile.getAbsolutePath(), true, null);
-	        	   blockResume = false;
 	        	   onResume();
 	           }
 	       })

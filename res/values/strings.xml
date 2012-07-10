@@ -61,4 +61,6 @@
 <string name="joystick_layout_size">Virtual joystick Size</string>
 <string name="old_joystick">Old joystick (v0.93.x)</string>
 <string name="old_joystick_summay">Enable old touch joystick (new one may cause perf issues on old devices ?)</string>
+<string name="useInputMethod">Allow alternate input methods (Bluetooth)</string>
+<string name="useInputMethodTitle">Alternate Input Method</string>
 </resources>

@@ -72,14 +72,14 @@ public class Settings extends PreferenceActivity {
 	        PreferenceCategory portPrefCat = new PreferenceCategory(this);
 	        portPrefCat.setTitle(R.string.mapping_settings);
 	        root.addPreference(portPrefCat);
-	        /*
-	        CheckBoxPreference toggleVirtualPref = new CheckBoxPreference(this);
-	        toggleVirtualPref.setKey("virtual");
-	        toggleVirtualPref.setTitle(R.string.virtual_keyb);
-	        toggleVirtualPref.setDefaultValue(false);
-	        toggleVirtualPref.setSummary(R.string.virtual_keyb_summary);
-	        portPrefCat.addPreference(toggleVirtualPref);
-	        */
+	        
+	        CheckBoxPreference toggleInputMethodPref = new CheckBoxPreference(this);
+	        toggleInputMethodPref.setKey("useInputMethod");
+	        toggleInputMethodPref.setTitle(R.string.useInputMethodTitle);
+	        toggleInputMethodPref.setDefaultValue(false);
+	        toggleInputMethodPref.setSummary(R.string.useInputMethod);
+	        portPrefCat.addPreference(toggleInputMethodPref);
+	        
 	        /*
 	        CheckBoxPreference toggleFsjoystickPref = new CheckBoxPreference(this);
 	        toggleFsjoystickPref.setKey("fsjoystick");

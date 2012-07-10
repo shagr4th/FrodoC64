@@ -9,7 +9,6 @@ import java.util.Map;
 import org.ab.nativelayer.ImportFileView;
 
 import android.app.Application;
-import android.util.Log;
 
 public class C64ImportView extends ImportFileView {
 

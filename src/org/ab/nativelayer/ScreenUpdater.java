@@ -56,11 +56,11 @@ public class ScreenUpdater implements Runnable {
 	            
 	          
 	            if (c != null) {
-	            	view.mainScreen.copyPixelsFromBuffer(view.drawCanvasBufferAsShort);
+	            	MainView.mainScreen.copyPixelsFromBuffer(MainView.drawCanvasBufferAsShort);
 	            	
 		            
 		            
-		            c.drawBitmap(view.mainScreen, view.matrixScreen, null);
+		            c.drawBitmap(MainView.mainScreen, view.matrixScreen, null);
 		            if (((MainActivity) view.getContext()).vKeyPad != null)
 		            	((MainActivity) view.getContext()).vKeyPad.draw(c);
 	            }
