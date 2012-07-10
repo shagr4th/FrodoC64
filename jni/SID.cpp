@@ -1351,7 +1351,7 @@ void DigitalRenderer::calc_buffer(int16 *buf, long count)
 		y = (sum_output + sum_output_filter) >> 10;
 		if (y == -8192 || y == 8191) //  || y == -4001
 		{
-			//y = 0;
+			y = 0;
 		}
 		
 		*buf++ = y;
