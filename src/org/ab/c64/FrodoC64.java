@@ -575,7 +575,7 @@ public class FrodoC64 extends MainActivity implements GameKeyListener
 				boolean shift = theKeyboard.getVisibility()==View.VISIBLE && currentKeyboardLayout == 0;
 				if (mainView != null && shift) { // on vire le keypad Android pour mettre celui de yongzh
 					theKeyboard.setVisibility(View.INVISIBLE);
-					vKeyPad = new VirtualKeypad(mainView, this, R.drawable.dpad, R.drawable.button);
+					vKeyPad = new VirtualKeypad(mainView, this, R.drawable.dpad5, R.drawable.button);
 					if (mainView.getWidth() > 0)
 						vKeyPad.resize(mainView.getWidth(), mainView.getHeight());
 				}
