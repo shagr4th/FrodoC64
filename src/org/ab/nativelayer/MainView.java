@@ -149,6 +149,7 @@ public class MainView extends SurfaceView implements SurfaceHolder.Callback {
 		        try {
 		            c = mSurfaceHolder.lockCanvas(null);
 		            synchronized (mSurfaceHolder) {
+		            	drawCanvasBufferAsShort.position(0);
 		            	 mainScreen.copyPixelsFromBuffer(drawCanvasBufferAsShort);
 		            	 if (c != null) {
 		            		
