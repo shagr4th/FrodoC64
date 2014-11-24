@@ -292,7 +292,7 @@ void Java_org_ab_c64_FrodoC64_registerClass( JNIEnv* env, jobject caller, jobjec
 {
 	LOGI("--registerClass--");
 	android_env = env;
-	android_callback = callback;
+	android_callback = (android_env)->NewGlobalRef(callback);
 	jclass c64 = (android_env)->GetObjectClass(android_callback);
 	LOGI("--frodoc64 registered--");
 	initAudio = (android_env)->GetMethodID(c64, "initAudio", "(III)V");
